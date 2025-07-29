@@ -19,7 +19,7 @@ def get_transactions():
 # Create operation
 @app.route("/add", methods = ['GET', 'POST'])
 def add_transaction():
-    if request.methods == 'POST':
+    if request.method == 'POST':
         transaction = {
             'id' : len(transactions) + 1,
             'date' : request.form['date'],
@@ -33,7 +33,7 @@ def add_transaction():
 # Update operation
 @app.route("/edit/<int:transaction_id>", methods = ['GET', 'POST'])
 def edit_transaction(transaction_id):
-    if request.methods == 'POST':
+    if request.method == 'POST':
         date = request.form['date']
         amount = float(request.form['amount']) 
     
@@ -57,7 +57,7 @@ def delete_transaction(transaction_id):
         if transaction['id'] == transaction_id:
             transactions.remove(transaction)
             break
-        return redirect(url_for('get_transactions'))  
+    return redirect(url_for('get_transactions'))  
 
 # Run the Flask app
 if __name__ == "__main__":
